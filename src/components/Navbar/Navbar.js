@@ -1,8 +1,32 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import './navbar.css'
 
-export function Navbar() {
+export function Navbar( ) {
+    
+
+     
+    const [data,setaData] = useState(
+
+   JSON.parse(localStorage.getItem('key')||[])
+
+    )
+
+
+    const [todle,setTogle] = useState(false)
+
+const togle = ()=>{
+    setTogle(!todle)
+ 
+}
+
+
+const del  = (id) =>{
+
+
+
+}
+
     return (
 
          <nav>
@@ -38,7 +62,7 @@ export function Navbar() {
 
                 </NavLink>
 
-                <NavLink>
+                <button onClick={togle}>
                 <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M1 1.17578L3.08 1.5316L4.04301 12.8715C4.12001 13.7976 4.90301 14.5082 5.84301 14.5053H16.752C17.649 14.5072 18.41 13.8549 18.537 12.9772L19.486 6.49532C19.592 5.77083 19.083 5.09872 18.351 4.99395C18.287 4.98505 3.414 4.98011 3.414 4.98011" stroke="#363853" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 <path d="M12.375 8.63337H15.1479" stroke="#363853" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -46,7 +70,7 @@ export function Navbar() {
 <path fill-rule="evenodd" clip-rule="evenodd" d="M16.6846 17.9316C16.9856 17.9316 17.2296 18.1729 17.2296 18.4696C17.2296 18.7673 16.9856 19.0085 16.6846 19.0085C16.3836 19.0085 16.1406 18.7673 16.1406 18.4696C16.1406 18.1729 16.3836 17.9316 16.6846 17.9316Z" fill="#363853" stroke="#363853" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 
-                </NavLink>
+                </button>
 
              <button>
              Sign Up
@@ -55,6 +79,25 @@ export function Navbar() {
             </div>
 
              </div>
+
+ <div className="modal  "  style={todle?{ transform: "translateX(0px)" }:{}}>
+   
+
+    {data.map((item)=>(
+        <div>
+            <img src={item.img} alt="" />
+
+            <p>{item.id}</p>
+            <p>{item.ism}</p>
+            <p>{item.narx}</p>
+            <button  onClick={ ()=>del(item.id)} >del</button>
+
+        </div>
+    ))}
+
+ </div>
+
+
         </nav>
       
 
